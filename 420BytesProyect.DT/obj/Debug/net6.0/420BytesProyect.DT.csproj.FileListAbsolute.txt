@@ -1,0 +1,11 @@
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\bin\Debug\net6.0\420BytesProyect.DT.deps.json
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\bin\Debug\net6.0\420BytesProyect.DT.dll
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\bin\Debug\net6.0\420BytesProyect.DT.pdb
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.AssemblyInfoInputs.cache
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.AssemblyInfo.cs
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.dll
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\refint\420BytesProyect.DT.dll
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.pdb
+C:\Users\Admin\source\repos\420BytesProyect\420BytesProyect.DT\obj\Debug\net6.0\ref\420BytesProyect.DT.dll

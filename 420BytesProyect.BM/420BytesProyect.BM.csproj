@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>_420BytesProyect.BM</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\420BytesProyect.DM\420BytesProyect.DM.csproj" />
+    <ProjectReference Include="..\420BytesProyect.DT\420BytesProyect.DT.csproj" />
+  </ItemGroup>
+
+</Project>
