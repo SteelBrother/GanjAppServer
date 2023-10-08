@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ntb9vjU0EYWObj2VbUkFK4+XbVebZXbaz97l/Fi3KPMDfjEPj96A4yyMwBvydbf8Bz1psjj47EJWetlsPN3zbQ==",
+  "dgSpecHash": "20C1qKTmI1LtdwIOtnMHiVYt6E/A2S9buO2ix1kUp71uxc8X3VX9DPV5VSf0TXJ9yeUQqZWwvX+pANGG6Ml8Cg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\source\\repos\\420BytesProyect\\420BytesProyect2.DM\\420BytesProyect2.DM.csproj",
+  "projectFilePath": "C:\\Git\\420Bytes\\420BytesProyect2.DM\\420BytesProyect2.DM.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\insight.database\\6.3.7\\insight.database.6.3.7.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\insight.database.configuration\\6.3.7\\insight.database.configuration.6.3.7.nupkg.sha512",

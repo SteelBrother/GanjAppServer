@@ -13,6 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IConexionBD, ConexionInsightDB>();
 builder.Services.AddTransient<IBMUsuarios, BMUsuarios>();
+builder.Services.AddTransient<IBMPlantas, BMPlanta>();
+builder.Services.AddTransient<IBMDispositivos, BMDispositivo>();
+builder.Services.AddTransient<IBMEstados, BMEstados>();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -11,4 +11,5 @@ namespace _420BytesProyect.DT.Usuario
         public int Cedula { get; set; }
         public string? Nombre { get; set; }
     }
+
 }

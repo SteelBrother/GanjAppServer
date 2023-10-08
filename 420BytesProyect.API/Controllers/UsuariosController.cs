@@ -16,17 +16,27 @@ namespace _420BytesProyect.API.Controllers
             this.IBMUsuarios = IBMUsuarios; 
         }
 
-        [HttpGet("Usuarios")]
+        [HttpGet("ConsultaUsuarios")]
         public async Task<ActionResult<List<Usuario>>> ConsultarUsuario()
         {
             return await IBMUsuarios.ConsultaUsuarios();
         }
-        [HttpGet("Usuario")]
-        public async Task<ActionResult<Usuario>>ConsultarUsuarioXCedula(int Cedula)
+        [HttpGet("ConsultarUsuarioPorCedula")]
+        public async Task<ActionResult<Usuario>>ConsultarUsuarioPorCedula(int Cedula)
         {
-            return await IBMUsuarios.TraerUsuarioXCedula(Cedula);
+            return await IBMUsuarios.ConsultarUsuarioPorCedula(Cedula);
         }
 
+        [HttpPost("RegistrarUsuario")]
+        public async Task<ActionResult<bool>> RegistrarUsuario(Usuario Usuario)
+        {
+            return await IBMUsuarios.RegistrarUsuario(Usuario);
+        }
 
+        [HttpPut("ActualizarUsuario")]
+        public async Task<ActionResult<bool>> ActualizarUsuario(Usuario Usuario)
+        {
+            return await IBMUsuarios.ActualizarUsuario(Usuario);
+        }
     }
 }
