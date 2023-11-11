@@ -36,24 +36,41 @@ namespace _420BytesProyect.BM.Identity
         /// Encripta el texto del parametro
         /// </summary>
         /// <param name="texto"></param>
-        public string Encriptar(string texto, string keyBase)
+        public string? Encriptar(string texto, string keyBase)
         {
-            string PdWEBkeyBase = keyBase;
-            string text = texto;
+            try
+            {
+                string Base = keyBase;
+                string text = texto;
 
-            DES DESalg = DES.Create();
+                DES DESalg = DES.Create();
 
-            DESalg.Key = Encoding.ASCII.GetBytes(PdWEBkeyBase);
-            DESalg.IV = DESalg.Key;
-            DESalg.Mode = CipherMode.ECB;
+                byte[] keyBytes = Encoding.ASCII.GetBytes(Base);
 
-            ICryptoTransform crypt = DESalg.CreateEncryptor();
+                if (keyBytes.Length > 8)
+                {
+                    Array.Resize(ref keyBytes, 8);
+                }
 
-            byte[] plain = Encoding.UTF8.GetBytes(text);
-            byte[] cipher = crypt.TransformFinalBlock(plain, 0, plain.Length);
-            String encryptedText = Convert.ToBase64String(cipher);
+                DESalg.Key = keyBytes;
+                DESalg.IV = DESalg.Key;
+                DESalg.Mode = CipherMode.ECB;
 
-            return encryptedText;
+                ICryptoTransform crypt = DESalg.CreateEncryptor();
+
+                byte[] plain = Encoding.UTF8.GetBytes(text);
+                byte[] cipher = crypt.TransformFinalBlock(plain, 0, plain.Length);
+                String encryptedText = Convert.ToBase64String(cipher);
+
+                return encryptedText;
+            }
+            catch (Exception ex)
+            {
+
+                var respuesta = ex.Message;
+                return null;
+            }
+            
         }
         public string GenerarContraseñaAleatoria(int longitudContrasenia)
         {

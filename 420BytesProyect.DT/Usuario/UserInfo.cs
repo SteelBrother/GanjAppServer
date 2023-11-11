@@ -15,7 +15,7 @@ namespace _420BytesProyect.DT.Usuario
         public string? CedulaCiudadania { get; set; }
         [Display(Name = "NickName")]
         public string? NickName { get; set; }
-        [Display(Name = "Contraseña")]
+        [Display(Name = "Password")]
         public string? Password { get; set; }
 
     }

@@ -11,7 +11,6 @@ namespace _420BytesProyect.DT.Identity
     {
         public int Id { get; set; }
         public string? NombreUsuario { get; set; }
-        public long NitFijo { get; set; }
         public string? Cedula { get; set; }
         public string? ValidacionIngreso { get; set; }
         public List<Rol>? RolesSeleccionados { get; set; }

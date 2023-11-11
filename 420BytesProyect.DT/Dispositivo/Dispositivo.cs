@@ -10,6 +10,6 @@ namespace _420BytesProyect.DT.Dispositivo
     {
         public int IdDispositivo { get; set; }
         public int CedulaUsuario { get; set; }
-        public String? Descripcion { get; set; }
+        public int AmbienteID { get; set; }
     }
 }

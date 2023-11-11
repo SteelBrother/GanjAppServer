@@ -12,7 +12,7 @@ namespace _420BytesProyect.BM.Identity.Interfaces
 {
     public interface IBMIdentity
     {
-        Task<ActionResult<UserToken>> Login(UserInfo userInfo);
+        Task<ActionResult<UserToken?>?> Login(UserInfo userInfo);
         Task<ActionResult<CambioContrasena>> ValidarCambioContrasena(string Id, string TipoIngresoId);
         Task<ActionResult<bool>> ActualizarContrasena(CambioContrasena CambioContrasena);
         Task<ActionResult<UserToken>> RenovarToken(int UsuarioId, int TipoIngresoId, int CompaniaId);

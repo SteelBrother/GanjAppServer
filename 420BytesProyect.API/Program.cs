@@ -2,8 +2,6 @@ using _420BytesProyect.DM.DataBase;
 using _420BytesProyect.DM;
 using _420BytesProyect.BM.General.Interfaces;
 using _420BytesProyect.BM.General;
-using Microsoft.AspNetCore.SignalR;
-using _420BytesProyect.BM.Hub;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -11,9 +9,15 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 using Microsoft.Extensions.Configuration;
+using _420BytesProyect.BM.Identity.Interfaces;
+using _420BytesProyect.BM.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using _420BytesProyect.DT.Identity;
+using _420BytesProyect.BM.HubMsj;
+using _420BytesProyect.BM.Scheduler.Interfaces;
+using _420BytesProyect.BM.Scheduler;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 var config = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -61,21 +65,49 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors( options => {
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
+builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSignalR();
 builder.Services.AddTransient<IConexionBD, ConexionInsightDB>();
 builder.Services.AddTransient<IBMUsuarios, BMUsuarios>();
 builder.Services.AddTransient<IBMPlantas, BMPlanta>();
 builder.Services.AddTransient<IBMDispositivos, BMDispositivo>();
 builder.Services.AddTransient<IBMEstados, BMEstados>();
+builder.Services.AddTransient<IBMIdentity, BMIdentity>();
+builder.Services.AddTransient<IBMAppointment, BMAppointment>(); 
+builder.Services.AddTransient<GeneradorPassword>();
+//builder.Services.AddTransient<UserUpdatesHub>();
 
+//var azureSignalRConnectionString = config.GetSection("SignalrAzureConnectionString:key");
+//builder.Services.AddSignalR()
+//    .AddAzureSignalR(azureSignalRConnectionString.Value);
+
+builder.Services.AddControllers();
+
+//var azureSignalRConnectionString = "Endpoint=https://signalr420bytes.service.signalr.net;AccessKey=z6w648X2uU9Nu/BEixgo/hiSR4u8Tj2Bb9G/xF2K/7A=;Version=1.0;";
+var azureSignalRConnectionString = "Endpoint=https://hub420bytesproyect.service.signalr.net;AccessKey=BVpQjnFatykkMc8ISSqU701+ZLqRxSyyQcA96GX/Y9k=;Version=1.0;";
+
+builder.Services.AddSignalR().AddAzureSignalR(option =>
+{
+    option.ConnectionString = azureSignalRConnectionString;
+});
+
+builder.Services.Configure<JwtConfig>(config.GetSection("jwt:key"));
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+    var key = Encoding.ASCII.GetBytes(config["jwt:key"]);
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = false,
@@ -100,20 +132,31 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API 420 Bytes Proyect"));
 }
 
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+app.UseHttpsRedirection();
+app.MapControllers();
+app.UseRouting();
+app.UseCors();
+app.UseAuthorization();
 
 //app.UseEndpoints(endpoints =>
 //{
 //    endpoints.MapControllers();
 //    app.UseEndpoints(endpoints =>
 //    {
-//        endpoints.MapHub<UsuarioHub>("/usuarioHub").RequireCors("AllowAll");
+//        endpoints.MapHub<UserUpdatesHub>("/UserUpdatesHub").RequireCors("AllowAll");
 //    });
 //});
 
-app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<UserUpdatesHub>("/UserUpdatesHub");
+});
 
-app.MapControllers();
+
 
 app.Run();

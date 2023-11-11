@@ -8,19 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Messaging.WebPubSub" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Connections" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.Azure.SignalR" Version="1.22.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\420BytesProyect.DM\420BytesProyect.DM.csproj" />
     <ProjectReference Include="..\420BytesProyect.DT\420BytesProyect.DT.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Hub\Interfaces\" />
   </ItemGroup>
 
 </Project>

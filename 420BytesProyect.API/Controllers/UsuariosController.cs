@@ -1,10 +1,13 @@
 ﻿using _420BytesProyect.BM.General;
 using _420BytesProyect.BM.General.Interfaces;
 using _420BytesProyect.DT.Usuario;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _420BytesProyect.API.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuariosController : ControllerBase

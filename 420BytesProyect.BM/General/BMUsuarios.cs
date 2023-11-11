@@ -1,6 +1,8 @@
 ﻿using _420BytesProyect.BM.General.Interfaces;
+using _420BytesProyect.BM.HubMsj;
 using _420BytesProyect.DM;
 using _420BytesProyect.DT.Usuario;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,14 @@ namespace _420BytesProyect.BM.General
     {
         private readonly IConexionBD conexionBD;
         private readonly ILogger<IBMUsuarios> logger;
-        public BMUsuarios(IConexionBD conexionBD, ILogger<IBMUsuarios> logger)
+        //private readonly UserUpdatesHub UsuarioHub;
+        private readonly IHubContext<UserUpdatesHub> UsuarioHub;
+        public BMUsuarios(IConexionBD conexionBD, ILogger<IBMUsuarios> logger, IHubContext<UserUpdatesHub> UsuarioHub)
         {
             this.conexionBD = conexionBD;
             this.logger = logger;
+            this.UsuarioHub = UsuarioHub;
+
         }
 
         public async Task<List<Usuario>> ConsultaUsuarios()
@@ -27,7 +33,12 @@ namespace _420BytesProyect.BM.General
             try
             {
                 var usuarios = await conexionBD.QueryAsync<Usuario>("Usuario.TraerUsuarios");
-                return usuarios.ToList();
+                if (usuarios != null)
+                {
+                    await UsuarioHub.Clients.All.SendAsync("UsuariosActualizados", usuarios);
+                    return usuarios.ToList();
+                }
+                return new List<Usuario>();
             }
             catch (Exception ex)
             {

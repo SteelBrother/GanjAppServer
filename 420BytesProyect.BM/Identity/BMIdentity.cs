@@ -6,30 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Reflection;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace _420BytesProyect.BM.Identity
 {
     public class BMIdentity : IBMIdentity
     {
+        private readonly string pass = "9a0fbc8f";
         private readonly IConexionBD ConexionBD;
         private readonly IConfiguration Configuration;
         private readonly GeneradorPassword GeneradorPassword;
@@ -43,26 +29,35 @@ namespace _420BytesProyect.BM.Identity
             this.Configuration = Configuration;
             this.GeneradorPassword = GeneradorPassword;
             this.logger = logger;
+
         }
 
 
-        public async Task<ActionResult<UserToken>> Login(UserInfo userInfo)
+        public async Task<ActionResult<UserToken?>?> Login(UserInfo userInfo)
         {
             try
             {
-                //var Password = userInfo.Password;
-                //userInfo.Password = GeneradorPassword.Encriptar(userInfo.Password, Configuration["PEDWEBkeyBase"]);
-                //var JwtDTO = await DMDTOs.ValidarUsuario(userInfo);
-                //if (JwtDTO == null)
-                //{
-                //    return null;
-                //}
-                //return BuildToken(JwtDTO);
+                //var nuevaContrasenaAleatoria = GenerarContraseña();
+                var Password = GeneradorPassword.Encriptar(userInfo.Password ?? "", Configuration["420ByteskeyBase"]);
+                var Respuesta = await ConexionBD.QueryFirstAsync<Usuario>("Usuario.SP_Login", new { userInfo.NickName, Password });
+                if (Respuesta == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    JwtDTO jwtDTO = new()
+                    {
+                        Cedula = Respuesta?.Cedula.ToString(),
+                        NombreUsuario = Respuesta?.NickName?.ToString(),
+                    };
 
+                    return BuildToken(jwtDTO);
+                }
             }
             catch (Exception ex)
             {
-                logger.LogError($"Clase: {GetType().Name}, Metodo: {MethodBase.GetCurrentMethod().DeclaringType.Name}, Tipo: {ex.GetType()}, Error: {ex.Message}");
+                logger.LogError($"Clase: {GetType().Name}, Metodo: {MethodBase.GetCurrentMethod()?.DeclaringType?.Name}, Tipo: {ex.GetType()}, Error: {ex.Message}");
             }
             return null;
         }
@@ -138,7 +133,8 @@ namespace _420BytesProyect.BM.Identity
         {
             try
             {
-                /*var JwtDTO = await DMDTOs.ConsultarUsuarioJWT(UsuarioId, TipoIngresoId, CompaniaId)*/;
+                /*var JwtDTO = await DMDTOs.ConsultarUsuarioJWT(UsuarioId, TipoIngresoId, CompaniaId)*/
+                ;
                 var JwtDTO = new JwtDTO();
                 if (JwtDTO != null)
                 {
@@ -185,48 +181,43 @@ namespace _420BytesProyect.BM.Identity
         }
         private UserToken BuildToken(JwtDTO JwtDTO)
         {
+            var claims = new List<Claim>()
+            {
+                new Claim(JwtRegisteredClaimNames.UniqueName, JwtDTO.Id.ToString()),
+                new Claim("Cedula", JwtDTO?.Cedula??""),
+                new Claim(ClaimTypes.Name, JwtDTO?.NombreUsuario??""),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            };
+            if (JwtDTO?.RolesSeleccionados != null)
+            {
+                foreach (var rol in JwtDTO.RolesSeleccionados)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, rol.Id.ToString()));
+                }
+            }
 
-            //var claims = new List<Claim>()
-            //{
-            //    new Claim(JwtRegisteredClaimNames.UniqueName, JwtDTO.Id.ToString()),
-            //    new Claim(ClaimTypes.Name, JwtDTO.NombreUsuario),
-            //    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            //    new Claim("CompaniaId", JwtDTO.CompaniaId.ToString()),
-            //    new Claim("TipoIngresoId", JwtDTO.TipoIngresoId.ToString()),
-            //};
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["jwt:key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            //foreach (var rol in JwtDTO.RolesSeleccionados)
-            //{
-            //    claims.Add(new Claim(ClaimTypes.Role, rol.Id.ToString()));
-            //}
+            var now = DateTime.UtcNow.AddDays(-1);
+            var expiration = DateTime.UtcNow.AddMinutes(15);
 
-            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:key"]));
-            //var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            JwtSecurityToken token = new(
+               issuer: null,
+               audience: null,
+               claims: claims,
+               notBefore: now,
+               expires: expiration,
+               signingCredentials: creds);
 
-            //var now = DateTime.UtcNow.AddDays(-1);
-            //var expiration = DateTime.UtcNow.AddMinutes(15);
-
-            //JwtSecurityToken token = new(
-            //   issuer: null,
-            //   audience: null,
-            //   claims: claims,
-            //   notBefore: now,
-            //   expires: expiration,
-            //   signingCredentials: creds);
-
-            //return new UserToken()
-            //{
-            //    Token = new JwtSecurityTokenHandler().WriteToken(token),
-            //    Expiration = expiration,
-            //    NitFijo = JwtDTO.NitFijo,
-            //    SucursalClienteHijo = JwtDTO.SucursalClienteHijo,
-            //    Cedula = JwtDTO.Cedula,
-            //    CentroOperativoId = JwtDTO.CentroOperativoId,
-            //    TipoUsuarioId = JwtDTO.TipoUsuarioId,
-            //    TipoIngresoId = JwtDTO.TipoIngresoId,
-            //    ValidacionIngreso = JwtDTO.ValidacionIngreso
-            //};
-            return new UserToken();
+            return new UserToken()
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiration = expiration,
+                Cedula = JwtDTO?.Cedula,
+                NickName = JwtDTO?.NombreUsuario,
+                ValidacionIngreso = JwtDTO?.ValidacionIngreso
+            };
         }
     }
 }

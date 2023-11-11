@@ -32,3 +32,15 @@ C:\Git\420Bytes\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.dll
 C:\Git\420Bytes\420BytesProyect.DT\obj\Debug\net6.0\refint\420BytesProyect.DT.dll
 C:\Git\420Bytes\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.pdb
 C:\Git\420Bytes\420BytesProyect.DT\obj\Debug\net6.0\ref\420BytesProyect.DT.dll
+C:\Git\420Bytes_Nm\420BytesProyect.DT\bin\Debug\net6.0\420BytesProyect.DT.deps.json
+C:\Git\420Bytes_Nm\420BytesProyect.DT\bin\Debug\net6.0\420BytesProyect.DT.dll
+C:\Git\420Bytes_Nm\420BytesProyect.DT\bin\Debug\net6.0\420BytesProyect.DT.pdb
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.csproj.AssemblyReference.cache
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.GeneratedMSBuildEditorConfig.editorconfig
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.AssemblyInfoInputs.cache
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.AssemblyInfo.cs
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.csproj.CoreCompileInputs.cache
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.dll
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\refint\420BytesProyect.DT.dll
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\420BytesProyect.DT.pdb
+C:\Git\420Bytes_Nm\420BytesProyect.DT\obj\Debug\net6.0\ref\420BytesProyect.DT.dll
