@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "uLKMPb3ZjNeW8V0sq7yDD62IAu9mRWPR+7tERZvQBE8=",
+  "Hash": "4u4AheX16iaaqh2IrbMEKjeRPHBRjvJbN4mUMvHXwEw=",
   "Source": "420BytesProyect.API",
   "BasePath": "_content/420BytesProyect.API",
   "Mode": "Default",
@@ -9,10 +9,10 @@
   "DiscoveryPatterns": [],
   "Assets": [
     {
-      "Identity": "C:\\Users\\ADMIN\\.nuget\\packages\\quick.aspnetcore.components.web.extensions\\6.0.2\\staticwebassets\\headManager.js",
+      "Identity": "C:\\Users\\Quick\\.nuget\\packages\\quick.aspnetcore.components.web.extensions\\6.0.2\\staticwebassets\\headManager.js",
       "SourceId": "Quick.AspNetCore.Components.Web.Extensions",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\ADMIN\\.nuget\\packages\\quick.aspnetcore.components.web.extensions\\6.0.2\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\Quick\\.nuget\\packages\\quick.aspnetcore.components.web.extensions\\6.0.2\\staticwebassets\\",
       "BasePath": "_content/Quick.AspNetCore.Components.Web.Extensions",
       "RelativePath": "headManager.js",
       "AssetKind": "All",
@@ -23,7 +23,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\ADMIN\\.nuget\\packages\\quick.aspnetcore.components.web.extensions\\6.0.2\\staticwebassets\\headManager.js"
+      "OriginalItemSpec": "C:\\Users\\Quick\\.nuget\\packages\\quick.aspnetcore.components.web.extensions\\6.0.2\\staticwebassets\\headManager.js"
     }
   ]
 }

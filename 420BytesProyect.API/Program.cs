@@ -82,6 +82,7 @@ builder.Services.AddTransient<IBMDispositivos, BMDispositivo>();
 builder.Services.AddTransient<IBMEstados, BMEstados>();
 builder.Services.AddTransient<IBMIdentity, BMIdentity>();
 builder.Services.AddTransient<IBMAppointment, BMAppointment>(); 
+builder.Services.AddTransient<IBMAmbientes, BMAmbientes>(); 
 builder.Services.AddTransient<GeneradorPassword>();
 //builder.Services.AddTransient<UserUpdatesHub>();
 
