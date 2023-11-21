@@ -11,7 +11,10 @@ namespace _420BytesProyect.BM.General.Interfaces
 {
     public interface IBMPlantas
     {
+        Task<bool> RegistrarHumedadSuelo(RegistroHumedadSuelo RegistroHumedadSuelo);
         Task<List<Planta>> ConsultarListaDePlantas();
-        Task<List<PlantaxUsuario>>ConsultarPlantasPorUsuario(int Cedula); 
+        Task<List<PlantaxUsuario>>ConsultarPlantasPorUsuario(int Cedula);
+        Task<bool> RegistrarNivelAgua(RegistroNivelAgua RegistroNivelAgua);
+        Task<Planta> RegistrarPlanta(Planta Planta);
     }
 }

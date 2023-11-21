@@ -12,7 +12,7 @@ namespace _420BytesProyect.BM.Scheduler.Interfaces
     {
         Task<List<AppointmentData>> ActualizarCita(AppointmentDataDTO appointmentDataDTO);
         Task<List<AppointmentData>> BorrarCita(AppointmentDataDTO appointmentDataDTO);
-        Task<List<AppointmentData>> ConsultarCitasPorCedula(int Cedula);
+        Task<List<AppointmentData>> ConsultarCitasPorCedula(int UsuarioId, int IdAmbiente, int IdPlanta);
         Task<List<AppointmentData>> RegistrarCita(AppointmentDataDTO appointmentDataDTO);
     }
 }

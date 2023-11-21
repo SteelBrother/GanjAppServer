@@ -48,7 +48,7 @@ namespace _420BytesProyect.BM.Identity
                 {
                     JwtDTO jwtDTO = new()
                     {
-                        Cedula = Respuesta?.Cedula.ToString(),
+                        Cedula = Respuesta?.UsuarioID.ToString(),
                         NombreUsuario = Respuesta?.NickName?.ToString(),
                     };
 

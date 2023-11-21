@@ -21,10 +21,10 @@ namespace _420BytesProyect.API.Controllers
             this.IBMAppointment = IBMAppointment;
         }
 
-        [HttpGet("ConsultarCitasPorCedula/{Cedula}")]
-        public async Task<ActionResult<List<AppointmentData>>> ConsultarCitasPorCedula(int Cedula)
+        [HttpGet("ConsultarCita")]
+        public async Task<ActionResult<List<AppointmentData>>> ConsultarCitasPorCedula(int UsuarioId, int IdAmbiente, int IdPlanta)
         {
-            return await IBMAppointment.ConsultarCitasPorCedula(Cedula);
+            return await IBMAppointment.ConsultarCitasPorCedula(UsuarioId,IdAmbiente,IdPlanta);
         }
 
         [HttpPost("RegistrarCita")]

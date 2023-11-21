@@ -8,6 +8,7 @@ namespace _420BytesProyect.DT.Scheduler
 {
     public class AppointmentData
     {
+       
         public int Id { get; set; }
         public string? Subject { get; set; }
         public string? Location { get; set; }
@@ -19,5 +20,8 @@ namespace _420BytesProyect.DT.Scheduler
         public string? RecurrenceException { get; set; }
         public Nullable<int> RecurrenceID { get; set; }
         public string? ApiUrl { get; set; }
+
     }
+
+
 }

@@ -11,7 +11,7 @@ namespace _420BytesProyect.DT.Planta
     {
         public int Id { get; set; }
         public int IdPlanta {  get; set; }
-        public decimal NivelAgua { get; set; }
+        public int Nivel { get; set; }
         public DateTime Fecha { get; set; }
     }
 }

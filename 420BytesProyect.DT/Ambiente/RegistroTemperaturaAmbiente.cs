@@ -11,6 +11,6 @@ namespace _420BytesProyect.DT.Ambiente
         public int Id { get; set; }
         public int IdAmbiente { get; set; }
         public decimal Temperatura { get; set; }
-        public DateTime Fecha { get; set; }
+        public DateTime? Fecha { get; set; }
     }
 }

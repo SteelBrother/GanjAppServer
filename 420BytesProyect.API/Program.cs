@@ -18,17 +18,17 @@ using _420BytesProyect.BM.Scheduler.Interfaces;
 using _420BytesProyect.BM.Scheduler;
 
 var builder = WebApplication.CreateBuilder(args);
-// Add services to the container.
 var config = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
     .AddJsonFile("appsettings.json")
     .Build();
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(c =>
 {
     var groupName = "v1";
-
     var securityScheme = new OpenApiSecurityScheme
     {
         Name = "JWT Authentication",
@@ -56,16 +56,16 @@ builder.Services.AddSwaggerGen(c =>
             Url = new Uri("https://github.com/SteelBrother"),
         }
     });
+
     c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
-     {
-        {
-          securityScheme, Array.Empty<string>()
-        }
+    {
+        { securityScheme, Array.Empty<string>() }
     });
 });
 
-builder.Services.AddCors( options => {
+builder.Services.AddCors(options =>
+{
     options.AddPolicy("CorsPolicy", policy =>
     {
         policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
@@ -74,27 +74,18 @@ builder.Services.AddCors( options => {
 
 builder.Services.AddSignalR();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IConexionBD, ConexionInsightDB>();
 builder.Services.AddTransient<IBMUsuarios, BMUsuarios>();
 builder.Services.AddTransient<IBMPlantas, BMPlanta>();
 builder.Services.AddTransient<IBMDispositivos, BMDispositivo>();
 builder.Services.AddTransient<IBMEstados, BMEstados>();
 builder.Services.AddTransient<IBMIdentity, BMIdentity>();
-builder.Services.AddTransient<IBMAppointment, BMAppointment>(); 
-builder.Services.AddTransient<IBMAmbientes, BMAmbientes>(); 
+builder.Services.AddTransient<IBMAppointment, BMAppointment>();
+builder.Services.AddTransient<IBMAmbientes, BMAmbientes>();
 builder.Services.AddTransient<GeneradorPassword>();
-//builder.Services.AddTransient<UserUpdatesHub>();
 
-//var azureSignalRConnectionString = config.GetSection("SignalrAzureConnectionString:key");
-//builder.Services.AddSignalR()
-//    .AddAzureSignalR(azureSignalRConnectionString.Value);
-
-builder.Services.AddControllers();
-
-//var azureSignalRConnectionString = "Endpoint=https://signalr420bytes.service.signalr.net;AccessKey=z6w648X2uU9Nu/BEixgo/hiSR4u8Tj2Bb9G/xF2K/7A=;Version=1.0;";
-var azureSignalRConnectionString = "Endpoint=https://hub420bytesproyect.service.signalr.net;AccessKey=BVpQjnFatykkMc8ISSqU701+ZLqRxSyyQcA96GX/Y9k=;Version=1.0;";
-
+//var azureSignalRConnectionString = "Endpoint=https://hub420bytesproyect.service.signalr.net;AccessKey=BVpQjnFatykkMc8ISSqU701+ZLqRxSyyQcA96GX/Y9k=;Version=1.0;";
+  var azureSignalRConnectionString = "Endpoint=https://signalrganjapp.service.signalr.net;AccessKey=CvDlYcigkHDJqO51iQAiF/L0G6dlx3VMCzeSldbjuZU=;Version=1.0;";
 builder.Services.AddSignalR().AddAzureSignalR(option =>
 {
     option.ConnectionString = azureSignalRConnectionString;
@@ -122,42 +113,25 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("RequiereToken", policy => policy.RequireAuthenticatedUser());
 });
+
 var app = builder.Build();
 
-
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API 420 Bytes Proyect"));
 }
 
-app.UseCors(builder => builder
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
-app.MapControllers();
 app.UseRouting();
-app.UseCors();
 app.UseAuthorization();
-
-//app.UseEndpoints(endpoints =>
-//{
-//    endpoints.MapControllers();
-//    app.UseEndpoints(endpoints =>
-//    {
-//        endpoints.MapHub<UserUpdatesHub>("/UserUpdatesHub").RequireCors("AllowAll");
-//    });
-//});
-
 
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllers();
     endpoints.MapHub<UserUpdatesHub>("/UserUpdatesHub");
+    endpoints.MapHub<AmbienteUpdatesHub>("/AmbienteUpdatesHub");
 });
-
-
 
 app.Run();

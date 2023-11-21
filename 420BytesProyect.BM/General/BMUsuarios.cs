@@ -20,6 +20,7 @@ namespace _420BytesProyect.BM.General
         private readonly ILogger<IBMUsuarios> logger;
         //private readonly UserUpdatesHub UsuarioHub;
         private readonly IHubContext<UserUpdatesHub> UsuarioHub;
+        
         public BMUsuarios(IConexionBD conexionBD, ILogger<IBMUsuarios> logger, IHubContext<UserUpdatesHub> UsuarioHub)
         {
             this.conexionBD = conexionBD;
@@ -35,7 +36,7 @@ namespace _420BytesProyect.BM.General
                 var usuarios = await conexionBD.QueryAsync<Usuario>("Usuario.TraerUsuarios");
                 if (usuarios != null)
                 {
-                    await UsuarioHub.Clients.All.SendAsync("UsuariosActualizados", usuarios);
+                    //await UsuarioHub.Clients.All.SendAsync("UsuariosActualizados", usuarios);
                     return usuarios.ToList();
                 }
                 return new List<Usuario>();

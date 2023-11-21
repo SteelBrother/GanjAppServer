@@ -10,7 +10,7 @@ namespace _420BytesProyect.DT.Ambiente
     {
         public int Id { get; set; }
         public int IdAmbiente { get; set; }
-        public decimal Luz { get; set; }
+        public int Porcentaje { get; set; }
         public DateTime Fecha { get; set; }
     }
 }

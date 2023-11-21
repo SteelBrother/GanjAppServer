@@ -63,11 +63,11 @@ namespace _420BytesProyect.BM.Scheduler
             }
         }
 
-        public async Task<List<AppointmentData>> ConsultarCitasPorCedula(int Cedula)
+        public async Task<List<AppointmentData>> ConsultarCitasPorCedula(int UsuarioId, int IdAmbiente, int IdPlanta)
         {
             try
             {
-                var usuarios = await conexionBD.QueryAsync<AppointmentData>("Scheduler.SP_ConsultarCitasPorCedula", new { Cedula });
+                var usuarios = await conexionBD.QueryAsync<AppointmentData>("Scheduler.SP_ConsultarCita", new { UsuarioId, IdAmbiente, IdPlanta });
                 if (usuarios != null)
                 {
                     

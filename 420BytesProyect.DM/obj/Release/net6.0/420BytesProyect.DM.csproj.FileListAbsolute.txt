@@ -1,0 +1,15 @@
+C:\Git\GanjAppServer\420BytesProyect.DM\bin\Release\net6.0\420BytesProyect.DM.deps.json
+C:\Git\GanjAppServer\420BytesProyect.DM\bin\Release\net6.0\420BytesProyect.DM.dll
+C:\Git\GanjAppServer\420BytesProyect.DM\bin\Release\net6.0\420BytesProyect.DM.pdb
+C:\Git\GanjAppServer\420BytesProyect.DM\bin\Release\net6.0\420BytesProyect.DT.dll
+C:\Git\GanjAppServer\420BytesProyect.DM\bin\Release\net6.0\420BytesProyect.DT.pdb
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.csproj.AssemblyReference.cache
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.AssemblyInfoInputs.cache
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.AssemblyInfo.cs
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.csproj.CoreCompileInputs.cache
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.csproj.CopyComplete
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.dll
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\refint\420BytesProyect.DM.dll
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\420BytesProyect.DM.pdb
+C:\Git\GanjAppServer\420BytesProyect.DM\obj\Release\net6.0\ref\420BytesProyect.DM.dll
